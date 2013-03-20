@@ -1,0 +1,152 @@
+﻿<Page
+    x:Class="LiveCurrencyConvertor.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LiveCurrencyConvertor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cfo="using:CharmFlyoutLibrary"
+    mc:Ignorable="d">
+    <Grid Style="{StaticResource LayoutRootStyle}" Background="DarkGoldenrod">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <cfo:CharmFlyout
+           x:Name="cfoAbout"
+           Heading="About"
+           HeadingBackgroundBrush="#FF4E0000"
+           Grid.RowSpan="2">
+            <StackPanel x:Name="cfoAboutPanel">
+                <TextBlock x:Name="cfoLine1" TextWrapping="Wrap" FontSize="16">Live Currency Converter.</TextBlock>
+                <TextBlock x:Name="cfoBlank1" />
+                <TextBlock x:Name="cfoLine2" TextWrapping="Wrap" FontSize="16">This app converts between 150+ currencies.</TextBlock>
+
+            </StackPanel>
+        </cfo:CharmFlyout>
+        <cfo:CharmFlyout
+           x:Name="cfoSettings"
+           Heading="Settings"
+           HeadingBackgroundBrush="#FF4E0000"
+           Grid.RowSpan="2">
+            <StackPanel x:Name="cfoSettingPanel">
+                <TextBlock x:Name="btnShowSettings" Width="166" FontSize="32" Height="50" Text="Display Settings" PointerPressed="BtnShowSettings_OnPointerPressed"></TextBlock>
+            </StackPanel>
+        </cfo:CharmFlyout>
+        <cfo:CharmFlyout
+           x:Name="cfoPolicy"
+           Heading="Policy"
+           HeadingBackgroundBrush="#FF4E0000"
+           Grid.RowSpan="2">
+            <StackPanel x:Name="cfoPolicyPanel">
+                <TextBlock x:Name="cfoPLine1" TextWrapping="Wrap" FontSize="16">Live Currency Converter Policy.</TextBlock>
+                <TextBlock x:Name="cfoPBlank1" />
+                <TextBlock x:Name="cfoPLine2" TextWrapping="Wrap" FontSize="16">This applications does require internet connection to work properly.</TextBlock>
+
+                <TextBlock x:Name="cfoPBlank2" />
+                <TextBlock x:Name="cfoPLine3" TextWrapping="Wrap" FontSize="16">This application does not take any personal information of user in any process and at any point of time.</TextBlock>
+            </StackPanel>
+        </cfo:CharmFlyout>
+        <!-- Back button and page title -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="PageTitle" Grid.Column="1" Text="   Live Currency Convertor" Style="{StaticResource PageHeaderTextStyle}"/>
+            
+        </Grid>
+        <Grid Grid.Row="1" HorizontalAlignment="Left" Height="483" VerticalAlignment="Top" Width="1086" Margin="20,50,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500"></ColumnDefinition>
+                <ColumnDefinition Width="500"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" >
+                <TextBlock HorizontalAlignment="Left" Margin="30,10,0,0" TextWrapping="Wrap" Text="Choose currencies from a collection of 150+ countries." VerticalAlignment="Top" FontSize="32"  FontStyle="Italic"/>
+                <TextBlock Text="From" Margin="30,10,0,0" FontSize="32"></TextBlock>
+                <ComboBox x:Name="From_listPicker" Margin="30,10,10,10" Width="300" HorizontalAlignment="Left"  FontSize="32" SelectionChanged="From_listPicker_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Background="YellowGreen" Width="60" Height="50" Margin="5">
+                                    <TextBlock x:Name="selCur" Text="{Binding curSf}" FontSize="30" HorizontalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="{Binding curLf}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="To" Margin="30,10,0,0" FontSize="32"></TextBlock>
+                <ComboBox x:Name="To_listPicker" Margin="30,10,10,10" Width="300" HorizontalAlignment="Left"  FontSize="32" SelectionChanged="To_listPicker_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Background="YellowGreen" Width="60" Height="50" Margin="5">
+                                    <TextBlock x:Name="selCur" Text="{Binding curSf}" FontSize="30" HorizontalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="{Binding curLf}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <Grid Grid.Row="1" HorizontalAlignment="Left" Height="483" VerticalAlignment="Top" Width="1086" Margin="20,50,0,0">
+                    <TextBox x:Name="amountInput" HorizontalAlignment="Left" Height="72" Margin="151,77,0,0" TextWrapping="Wrap" FontSize="32" Text="1" VerticalAlignment="Top" Width="156" InputScope="Number"/>
+                    <TextBlock x:Name="convertionTitle" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding selCur.Text, ElementName=From_listPicker.SelectedItems }" VerticalAlignment="Top" FontSize="32" FontWeight="Bold" Height="62" Width="410"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,89,0,0" TextWrapping="Wrap" Text="Amount:" VerticalAlignment="Top" FontSize="32" Width="146"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,311,0,0" TextWrapping="Wrap" Text="Result" VerticalAlignment="Top" FontSize="32" FontWeight="Bold"/>
+                    <TextBlock x:Name="resultOutput" HorizontalAlignment="Left" Margin="10,359,0,0" TextWrapping="Wrap" Text=" --- =  ---" VerticalAlignment="Top" FontSize="32" Width="400" Height="97"/>
+                    <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Left" Margin="160,174,0,0"  FontSize="32" VerticalAlignment="Top" Click="ConvertButton_Click" Width="166"/>
+                </Grid>
+            </StackPanel>
+            
+        </Grid>
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled"/>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PortraitBackButtonStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <!-- The back button and title have different styles when snapped -->
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedBackButtonStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageTitle" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+    <Page.BottomAppBar>
+        <AppBar x:Name="BottomAppBar1" Padding="10,0,10,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="LeftPanel" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
+
+                    <Button x:Name="Settings" Style="{StaticResource SettingsAppBarButtonStyle}" Tag="Settings" Click="Load_OnClick">
+
+                    </Button>
+                </StackPanel>
+            </Grid>
+            </AppBar>
+        </Page.BottomAppBar>
+</Page>

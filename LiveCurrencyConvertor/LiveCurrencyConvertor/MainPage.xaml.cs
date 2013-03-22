@@ -27,7 +27,7 @@ namespace LiveCurrencyConvertor
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : LiveCurrencyConvertor.Common.LayoutAwarePage
     {
         public class SampleData
         {
@@ -40,8 +40,8 @@ namespace LiveCurrencyConvertor
         public CurrencyList allCurrency = new CurrencyList();
 
         public double CurrencyRate = 0.0;
-        public string From = "...";
-        public string To = "...";
+        public string From = "USD";
+        public string To = "PKR";
         public MainPage()
         {
             this.InitializeComponent();
@@ -244,11 +244,10 @@ namespace LiveCurrencyConvertor
             }
             if (!afound)
                 args.Request.ApplicationCommands.Add(new SettingsCommand("s", "About", (p) => { cfoAbout.IsOpen = true; }));
-            if (!sfound)
-                args.Request.ApplicationCommands.Add(new SettingsCommand("s", "Settings", (p) => { cfoSettings.IsOpen = true; }));
-            
+            //if (!sfound)
+            //    args.Request.ApplicationCommands.Add(new SettingsCommand("s", "Settings", (p) => { cfoSettings.IsOpen = true; }));
+            //if (!pfound)
             //    args.Request.ApplicationCommands.Add(new SettingsCommand("s", "Policy", (p) => { cfoPolicy.IsOpen = true; }));
-            if (!pfound)
             args.Request.ApplicationCommands.Add(new SettingsCommand("privacypolicy", "Privacy policy", OpenPrivacyPolicy));
 
         }

@@ -137,6 +137,7 @@
     <None Include="Service References\CurrencyConvertor_ServiceReference\CurrencyConvertor.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\images.jpg" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />

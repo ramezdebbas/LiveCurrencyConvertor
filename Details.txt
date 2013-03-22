@@ -1,0 +1,10 @@
+Live Currency Converter:
+
+Can covert 150+ curriency into any other curriency you want.
+
+Features:
+
+-The convertion is updates regularly and you get the live curreincy values.
+-You can use the app while snapping.
+-Easy to use app.
+
